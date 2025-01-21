@@ -7,11 +7,9 @@
       ansible.builtin.apt:
         name:
           - nginx
-          - wget
-          - unzip
         state: present
         update_cache: yes
-
+        
     - name: Ensure Nginx is started and enabled
       ansible.builtin.service:
         name: nginx
@@ -26,11 +24,12 @@
     - name: Unzip the file
       ansible.builtin.unarchive:
         src: "/tmp/2137_barista_cafe.zip"  
-        dest: "/tmp/aaa"       
-        remote_src: yes             
+        dest: "/tmp/test"      
+        remote_src: yes   
+              
     - name: Move files to Nginx root directory
       ansible.builtin.shell:
-        cmd: mv  /tmp/aaa/2137_barista_cafe/*  /var/www/html/
+        cmd: rm -rf /var/www/html/* ; mv  /tmp/test/2137_barista_cafe/*  /var/www/html/
       become: yes  
 
 
