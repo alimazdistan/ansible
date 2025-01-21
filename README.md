@@ -1,4 +1,4 @@
-Playbook to Setup Nginx and Deploy Barista Cafe Template
+Playbook to Setup Nginx and Deploy Barista Cafe Template.
 This Ansible playbook automates the process of setting up Nginx on a remote server, downloading the Barista Cafe template from Tooplate, extracting the files, and deploying the website.
 
 Steps:
