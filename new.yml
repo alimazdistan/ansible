@@ -1,0 +1,48 @@
+---
+- name: Setup Nginx and deploy Barista Cafe template
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install required packages (nginx, wget, unzip)
+      ansible.builtin.apt:
+        name:
+          - nginx
+          - wget
+          - unzip
+        state: present
+        update_cache: yes
+
+    - name: Ensure Nginx is started and enabled
+      ansible.builtin.service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Download the ZIP file from tooplate
+      ansible.builtin.get_url:
+        url: "https://www.tooplate.com/zip-templates/2137_barista_cafe.zip"
+        dest: "/tmp/2137_barista_cafe.zip"  
+
+    - name: Unzip the file
+      ansible.builtin.unarchive:
+        src: "/tmp/2137_barista_cafe.zip"  
+        dest: "/tmp/aaa"       
+        remote_src: yes             
+    - name: Move files to Nginx root directory
+      ansible.builtin.shell:
+        cmd: mv  /tmp/aaa/2137_barista_cafe/*  /var/www/html/
+      become: yes  
+
+
+    - name: Set permissions for web files
+      ansible.builtin.file:
+        path: "/var/www/html/"
+        owner: root
+        group: root
+        recurse: yes
+        mode: '0755'
+
+    - name: Restart Nginx service
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
