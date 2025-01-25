@@ -22,7 +22,7 @@
     - name: Download the ZIP file from tooplate
       ansible.builtin.get_url:
         url: "https://www.tooplate.com/zip-templates/2137_barista_cafe.zip"
-        dest: "/tmp/2137_barista_cafe.zip"  # مسیر ذخیره فایل در مقصد
+        dest: "/tmp/2137_barista_cafe.zip" 
 
     
     - name: Create /tmp/test directory if it doesn't exist
@@ -34,7 +34,7 @@
     - name: Unzip the file
       ansible.builtin.unarchive:
         src: "/tmp/2137_barista_cafe.zip"   # فایل ZIP دانلود شده
-        dest: "/tmp/test"        # محل استخراج فایل‌ها موقتا
+        dest: "/tmp/test"       
         remote_src: yes   
               
     - name: Move files to Nginx root directory
