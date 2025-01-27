@@ -33,7 +33,7 @@
 
     - name: Unzip the file
       ansible.builtin.unarchive:
-        src: "/tmp/2137_barista_cafe.zip"   # فایل ZIP دانلود شده
+        src: "/tmp/2137_barista_cafe.zip"   
         dest: "/tmp/test"       
         remote_src: yes   
               
